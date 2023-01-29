@@ -3,6 +3,8 @@ FROM golang:1.17-alpine AS build
 ENV CGO_ENABLED=0
 WORKDIR /app
 COPY . .
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+RUN go env -w GOPROXY=https://goproxy.cn
 RUN apk add --no-cache build-base && \
     go build -ldflags '-extldflags "-static"' -o ./zkprover-mock ./tools/zkevmprovermock/cmd/...
 
