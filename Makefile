@@ -31,6 +31,7 @@ build-docker: ## Builds a docker image with the node binary
 .PHONY: build-docker-nc
 build-docker-nc: ## Builds a docker image with the node binary - but without build cache
 	docker build --no-cache=true -t zkevm-node -f ./Dockerfile .
+	docker build -t hermeznetwork/zkprover-mock:latest -f tools/zkevmprovermock/Dockerfile .
 
 .PHONY: run-rpc
 run-rpc: ## Runs all the services need to run a local zkEMV RPC node
